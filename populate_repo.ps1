@@ -62,12 +62,34 @@ Add-Content app.py @"
 
 def greet_uppercase(name):
     return greet(name).upper()
-
-someting ereoreoooa!!!!
 "@
 
 git add app.py
 git commit -m "add uppercase greeting helper"
 
-Write-Host "6 commits are added, check with git log --oneline"
+# Create chloe branch for hotfix practice
+git checkout -b chloe
+
+# commit 7: introduce error in app.py
+Add-Content app.py @"
+
+DEBUG: temporary debug line - DELETE THIS
+print("DEBUG: This should not be in production")
+"@
+
+git add app.py
+git commit -m "add debug statement"
+
+# commit 8: add error.py file
+@"
+# This file was accidentally committed - DELETE THIS FILE
+# Emergency hotfix placeholder
+"@ | Set-Content error.py
+
+git add error.py
+git commit -m "add error.py"
+
+Write-Host "6 commits on main branch, 2 commits on chloe branch created"
+Write-Host "You are now on the 'chloe' branch"
+Write-Host "Check with git log --oneline and git branch"
 

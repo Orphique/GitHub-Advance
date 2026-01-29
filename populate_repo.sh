@@ -63,11 +63,33 @@ cat >> app.py <<'EOF'
 
 def greet_uppercase(name):
     return greet(name).upper()
-    
-someting ereoreoooa!!!!
 EOF
 
 git add app.py
 git commit -m "add uppercase greeting helper"
 
-echo "6 commits are added, check with git log --oneline"
+# Create chloe branch for hotfix practice
+git checkout -b chloe
+
+# commit 7: introduce error in app.py
+cat >> app.py <<'EOF'
+
+DEBUG: temporary debug line - DELETE THIS
+print("DEBUG: This should not be in production")
+EOF
+
+git add app.py
+git commit -m "add debug statement"
+
+# commit 8: add error.py file
+cat > error.py <<'EOF'
+# This file was accidentally committed - DELETE THIS FILE
+# Emergency hotfix placeholder
+EOF
+
+git add error.py
+git commit -m "add error.py"
+
+echo "6 commits on main branch, 2 commits on chloe branch created"
+echo "You are now on the 'chloe' branch"
+echo "Check with git log --oneline and git branch"
